@@ -80,8 +80,8 @@ void pairsum::findSort()
 
 int main()
 {
-	ofstream outData;
-	outData.open("output.csv");
+	ofstream outfile;
+	outfile.open("output.csv");
 	int t;
 	cin>>t;
 	while(t--){
@@ -122,6 +122,6 @@ int main()
   
     m3=duration.count();     
     //findSort(v,p);
-    outData<<val++<<","<<m1<<","<<m2<<","<<m3<<endl;
+    outfile<<val++<<","<<m1<<","<<m2<<","<<m3<<endl;
 }
 }

@@ -2,58 +2,72 @@
 using namespace std;
 using namespace std::chrono;
 
+class pairsum{
+public:
+	vector<int>V;
+	int P;
+	pairsum(vector<int>v,int p){
+		for(int i=0;i<v.size();i++)
+			V.push_back(v[i]);
+		P=p;
+	}
+	void findNum();
+	void findNummap();
+	void findSort();
+};
+
 int val=0;
 
-void findNum(vector<int>v,int p)
+void pairsum::findNum()
 {
 	//cout<<V.size()<<endl;
 	cout<<"vector"<<endl;
-	for(int i=0;i<v.size();i++)
+	for(int i=0;i<V.size();i++)
     {
-    	for(int j=0;j<v.size();j++)
+    	for(int j=0;j<V.size();j++)
     	{
-    		if(v[j]==p-v[i])
+    		if(V[j]==P-V[i])
     		{
-    			cout<<v[i]<<" "<<v[j]<<endl;
+    			cout<<V[i]<<" "<<V[j]<<endl;
     			return;
     		}
     	}
     }
 }
 
-void findNummap(vector<int>v,int p)
+void pairsum::findNummap()
 {
-	int n=v.size();
+	int n=V.size();
 	cout<<"Map"<<endl;
 	unordered_map<int,int>m;
 	for(int i=0;i<n;i++)
 	{
-		m[v[i]]++;
+		m[V[i]]++;
 	}
 	for(int i=0;i<n;i++)
 	{
-		if(m[p-v[i]]>=1)
+		if(m[P-V[i]]>=1)
 		{
-			cout<<v[i]<<" "<<p-v[i]<<endl;
+			cout<<V[i]<<" "<<P-V[i]<<endl;
 			return ;
 			
 		}
 	}
 }
 
-void findSort(vector<int>v,int p)
+void pairsum::findSort()
 {
 	cout<<"Two pointer"<<endl;
-	sort(v.begin(),v.end());
-	int i=0,j=v.size()-1;
+	sort(V.begin(),V.end());
+	int i=0,j=V.size()-1;
 	while(i<j)
 	{
-		if(v[i]+v[j]==p)
+		if(V[i]+V[j]==P)
 		{
-			cout<<v[i]<<" "<<v[j]<<endl;
+			cout<<V[i]<<" "<<V[j]<<endl;
 			return;
 		}
-		else if(v[i]+v[j]<p)
+		else if(V[i]+V[j]<P)
 		{
 			i++;
 		}
@@ -82,22 +96,27 @@ int main()
 
 	cout<<"Enter the integer"<<endl;
     cin>>p;
+
+    //creating a pairsum object
+    pairsum ob(v,p);
+
+
     auto start = high_resolution_clock::now(); 
-	findNum(v,p);
+	ob.findNum();
 	 auto stop = high_resolution_clock::now(); 
 	 auto duration = duration_cast<microseconds>(stop - start); 
   
     m1=duration.count();
     //findNum(v,p);
     start = high_resolution_clock::now(); 
-    findNummap(v,p);
+    ob.findNummap();
 	 stop = high_resolution_clock::now(); 
 	  duration = duration_cast<microseconds>(stop - start); 
   
     m2=duration.count(); 
     //findNummap(v,p);
     start = high_resolution_clock::now(); 
-    findSort(v,p);
+    ob.findSort();
 	stop = high_resolution_clock::now(); 
 	duration = duration_cast<microseconds>(stop - start); 
   

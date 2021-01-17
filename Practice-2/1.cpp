@@ -6,6 +6,7 @@ class pairsum{
 public:
 	vector<int>V;
 	int P;
+	int val=0;
 	pairsum(vector<int>v,int p){
 		for(int i=0;i<v.size();i++)
 			V.push_back(v[i]);
@@ -16,7 +17,7 @@ public:
 	void findSort();
 };
 
-int val=0;
+
 
 void pairsum::findNum()
 {

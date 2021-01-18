@@ -29,11 +29,14 @@ void pairsum::findNum()
     	{
     		if(V[j]==P-V[i])
     		{
+    			if(i!=j){
     			cout<<V[i]<<" "<<V[j]<<endl;
     			return;
     		}
+    		}
     	}
     }
+    cout<<"Not Found"<<endl;
 }
 
 void pairsum::findNummap()
@@ -49,11 +52,21 @@ void pairsum::findNummap()
 	{
 		if(m[P-V[i]]>=1)
 		{
-			cout<<V[i]<<" "<<P-V[i]<<endl;
-			return ;
-			
+			if(V[i]==P-V[i]){
+			   if(m[V[i]]>=2)
+			   {	
+			     cout<<V[i]<<" "<<P-V[i]<<endl;
+			     return ;
+		       }
+		    }
+		    else
+		    {
+		    	cout<<V[i]<<" "<<P-V[i]<<endl;
+			     return ;
+		    }
 		}
 	}
+	cout<<"Not Found"<<endl;
 }
 
 void pairsum::findSort()
@@ -77,6 +90,7 @@ void pairsum::findSort()
 			j--;
 		}
 	}
+	cout<<"Not Found"<<endl;
 }
 
 int main()
@@ -123,6 +137,6 @@ int main()
   
     m3=duration.count();     
     //findSort(v,p);
-    outfile<<val++<<","<<m1<<","<<m2<<","<<m3<<endl;
+    outfile<<ob.val++<<","<<m1<<","<<m2<<","<<m3<<endl;
 }
 }

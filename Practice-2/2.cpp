@@ -1,8 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+class findn{
+public:
+	void method1();
+	void method2();
+	void method3();
+};
 
-void method1()
+void findn::method1()
 {
 	cout<<"linear search"<<endl;
 	int arr[5000];
@@ -28,9 +34,9 @@ void method1()
 	}
 }
 
-void method2()
+void findn::method2()
 {
-	cout<<"binary search"<<endl;
+	cout<<"Divide and conquer"<<endl;
 	int arr[5000];
 	int i=0;
 	int val;
@@ -70,7 +76,7 @@ void method2()
 	}
 }
 
-void method3()
+void findn::method3()
 {
 	cout<<"Do while"<<endl;
 	int arr[5000];
@@ -93,5 +99,8 @@ void method3()
 
 int main()
 {
-	method2();
+	findn p;
+	p.method1();
+	p.method2();
+	p.method3();
 }

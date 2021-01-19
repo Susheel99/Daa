@@ -6,7 +6,6 @@ class pairsum{
 public:
 	vector<int>V;
 	int P;
-	int val=0;
 	pairsum(vector<int>v,int p){
 		for(int i=0;i<v.size();i++)
 			V.push_back(v[i]);
@@ -17,7 +16,7 @@ public:
 	void findSort();
 };
 
-
+int val=0;
 
 void pairsum::findNum()
 {
@@ -96,7 +95,7 @@ void pairsum::findSort()
 int main()
 {
 	ofstream outfile;
-	outfile.open("output.csv");
+	outfile.open("output1.csv");
 	int t;
 	cin>>t;
 	while(t--){
@@ -137,6 +136,6 @@ int main()
   
     m3=duration.count();     
     //findSort(v,p);
-    outfile<<ob.val++<<","<<m1<<","<<m2<<","<<m3<<endl;
+    outfile<<val++<<","<<m1<<","<<m2<<","<<m3<<endl;
 }
 }

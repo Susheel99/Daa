@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+using namespace std::chrono;
 
 class findn{
 public:
@@ -10,6 +11,7 @@ public:
 
 void findn::method1()
 {
+	auto start = high_resolution_clock::now();
 	cout<<"linear search"<<endl;
 	int arr[5000];
 	int i=0;
@@ -32,10 +34,14 @@ void findn::method1()
 			break;
 		}
 	}
+	auto stop = high_resolution_clock::now(); 
+	 auto duration = duration_cast<microseconds>(stop - start); 
+	 cout<<duration.count()<<endl;
 }
 
 void findn::method2()
 {
+	auto start = high_resolution_clock::now();
 	cout<<"Divide and conquer"<<endl;
 	int arr[5000];
 	int i=0;
@@ -74,10 +80,14 @@ void findn::method2()
 			break;
 		}
 	}
+	auto stop = high_resolution_clock::now(); 
+	 auto duration = duration_cast<microseconds>(stop - start); 
+	 cout<<duration.count()<<endl;
 }
 
 void findn::method3()
 {
+	auto start = high_resolution_clock::now();
 	cout<<"Do while"<<endl;
 	int arr[5000];
 	int i=0;
@@ -93,6 +103,9 @@ void findn::method3()
 		cin>>val;
 	}
 	while(val);
+	auto stop = high_resolution_clock::now(); 
+	 auto duration = duration_cast<microseconds>(stop - start); 
+	 cout<<duration.count()<<endl;
 
 	cout<<res<<endl;
 }
@@ -103,4 +116,5 @@ int main()
 	p.method1();
 	p.method2();
 	p.method3();
+	
 }

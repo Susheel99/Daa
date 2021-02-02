@@ -28,7 +28,7 @@ void subsetsum(vector<int>v,int n, int k)
 			   cout<<endl;
 		}
 	}
-	cout<<"No"<<endl;
+	//cout<<"No"<<endl;
 }
 
 

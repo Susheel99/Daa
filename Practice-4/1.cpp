@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int way1(int *arr,int n)
+int max_1way(int *arr,int n)
 {
 	int m=arr[0];
 	for(int i=1;i<n;i++)
@@ -14,7 +14,7 @@ int way1(int *arr,int n)
 	return m;
 }
 
-int way2(int *arr,int s,int e)
+int max_2way(int *arr,int s,int e)
 {
 	if(s==e)
 		return arr[s];
@@ -26,7 +26,7 @@ int way2(int *arr,int s,int e)
 	return max(a,b);
 }
 
-int findmax_3way(int arr[],int low, int high)
+int max_3way(int arr[],int low, int high)
 {
 
     if (low == high){
@@ -51,7 +51,7 @@ int findmax_3way(int arr[],int low, int high)
     return max(m1,max(m2,m3));
 }
 
-int findmax_kway(int arr[],int low, int high, int k)
+int max_kway(int arr[],int low, int high, int k)
 {
 
     if (low == high){
@@ -93,7 +93,6 @@ int findmax_kway(int arr[],int low, int high, int k)
     int m3 = findmax_kway(arr,mids[k-2] + 1, high, k);
 
     if(m3>maxi){
-
         // cout<<m3<<"\n";
         return m3;
     }

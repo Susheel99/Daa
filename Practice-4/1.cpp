@@ -48,22 +48,7 @@ int findmax_3way(int arr[],int low, int high)
     int m2 = findmax_3way(arr,mid1 + 1, mid2);
     int m3 = findmax_3way(arr,mid2 + 1, high);
 
-    if(m1>m2){
-        if(m1>m3){
-            return m1;
-        }
-        else{
-            return m3;
-        }
-    }
-    else{
-        if(m2>m3){
-           return m2;
-        }
-        else{
-            return m3;
-        }
-    }
+    return max(m1,max(m2,m3));
 }
 
 int findmax_kway(int arr[],int low, int high, int k)

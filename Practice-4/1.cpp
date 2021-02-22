@@ -1,7 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int max_1way(int *arr,int n)
+class max_way{
+public:
+	vector<int>arr;
+	int n;
+	max_way(vector<int>V,int N)
+	{
+		arr=V;
+		n=N;
+	}
+	int max_1way();
+	int max_2way(int s,int e);
+	int max_3way(int s,int e);
+	int max_kway(int s,int e,int k);
+};
+
+int max_way::max_1way()
 {
 	int m=arr[0];
 	for(int i=1;i<n;i++)
@@ -14,19 +29,19 @@ int max_1way(int *arr,int n)
 	return m;
 }
 
-int max_2way(int *arr,int s,int e)
+int max_way::max_2way(int s,int e)
 {
 	if(s==e)
 		return arr[s];
 
 	int mid=(s+e)/2;
-	int a=way2(arr,s,mid);
-	int b=way2(arr,mid+1,e);
+	int a=max_2way(s,mid);
+	int b=max_2way(mid+1,e);
 
 	return max(a,b);
 }
 
-int max_3way(int arr[],int low, int high)
+int max_way::max_3way(int low, int high)
 {
 
     if (low == high){
@@ -44,14 +59,14 @@ int max_3way(int arr[],int low, int high)
     int mid1 = low + mid - 1;
     int mid2 = mid1 + mid;
 
-    int m1 = findmax_3way(arr,low, mid1);
-    int m2 = findmax_3way(arr,mid1 + 1, mid2);
-    int m3 = findmax_3way(arr,mid2 + 1, high);
+    int m1 = max_3way(low, mid1);
+    int m2 = max_3way(mid1 + 1, mid2);
+    int m3 = max_3way(mid2 + 1, high);
 
     return max(m1,max(m2,m3));
 }
 
-int max_kway(int arr[],int low, int high, int k)
+int max_way::max_kway(int low, int high, int k)
 {
 
     if (low == high){
@@ -78,26 +93,26 @@ int max_kway(int arr[],int low, int high, int k)
 
     }
 
-    int m1 = findmax_kway(arr,low, mids[0], k);
+    int m1 = max_kway(low, mids[0], k);
     int maxi = m1;
 
     for(int i=0; i<k-1; i++){
 
-        int m2 = findmax_kway(arr,mids[i] + 1, mids[i+1], k);
+        int m2 = max_kway(mids[i] + 1, mids[i+1], k);
         if(maxi<m2){
             maxi = m2;
         }
     }
 
 
-    int m3 = findmax_kway(arr,mids[k-2] + 1, high, k);
+    int m3 = max_kway(mids[k-2] + 1, high, k);
 
     if(m3>maxi){
-        // cout<<m3<<"\n";
+        
         return m3;
     }
     else{
-        // cout<<maxi<<"\n";
+        
         return maxi;
     }
 }
@@ -107,13 +122,15 @@ int main()
 {
 	int n;
 	cin>>n;
-	int arr[n];
+	vector<int>v(n);
 	for(int i=0;i<n;i++)
 	{
-		cin>>arr[i];
+		cin>>v[i];
 	}
-	cout<<"1-Way "<<way1(arr,n)<<endl;
-	cout<<way2(arr,0,n-1)<<endl;
-	cout<<"3-way "<<findmax_3way(arr,0,n-1)<<endl;
-	cout<<"k-way "<<findmax_kway(arr,0,n-1,4)<<endl;
+
+	max_way ob(v,n);
+	cout<<"1-Way "<<ob.max_1way()<<endl;
+	cout<<"2-Way "<<ob.max_2way(0,n-1)<<endl;
+	cout<<"3-way "<<ob.max_3way(0,n-1)<<endl;
+	cout<<"k-way "<<ob.max_kway(0,n-1,4)<<endl;
 }

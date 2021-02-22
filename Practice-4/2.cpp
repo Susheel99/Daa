@@ -38,6 +38,8 @@ int findneg_way::find_3way(int low, int high)
         else 
             return 0;
     }
+    if(low>high)
+    	return 0;
 
 
     int mid = (high - low + 1)/3;

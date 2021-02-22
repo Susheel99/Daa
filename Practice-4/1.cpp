@@ -44,11 +44,13 @@ int max_way::max_2way(int s,int e)
 int max_way::max_3way(int s, int e)
 {
 
-    if (s == e){
+    if (s == e)
+    {
         return arr[s];
     }
 
-    if(s>e){
+    if(s>e)
+    {
         return INT_MIN;
     }
 
@@ -69,11 +71,13 @@ int max_way::max_3way(int s, int e)
 int max_way::max_kway(int s, int e, int k)
 {
 
-    if (s == e){
+    if (s == e)
+    {
       return arr[s];
     }
 
-    if(s>e){
+    if(s>e)
+    {
         return INT_MIN;
     }
 
@@ -83,7 +87,8 @@ int max_way::max_kway(int s, int e, int k)
         mid = 1;
     }
     mids[0] = s + mid - 1;
-    for(int i = 1; i<k; i++){
+    for(int i = 1; i<k; i++)
+    {
         if(i>(e - s)){
             mids[i] = mids[0];
         }
@@ -92,22 +97,21 @@ int max_way::max_kway(int s, int e, int k)
         }
 
     }
-
     int m1 = max_kway(s, mids[0], k);
-    int maxi = m1;
+    int m_i = m1;
 
-    for(int i=0; i<k-1; i++){
-
+    for(int i=0; i<k-1; i++)
+    {
         int m2 = max_kway(mids[i] + 1, mids[i+1], k);
-        if(maxi<m2){
-            maxi = m2;
+        if(m_i<m2){
+            m_i = m2;
         }
     }
 
 
     int m3 = max_kway(mids[k-2] + 1, e, k);
 
-    return max(m3,maxi);
+    return max(m3,m_i);
 }
 
 

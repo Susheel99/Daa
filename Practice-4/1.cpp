@@ -1,22 +1,32 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class max_way{
+
+
+class Parent{
 public:
-	vector<int>arr;
 	int n;
-	max_way(vector<int>V,int N)
+	vector<int>arr;
+	void input(int N)
 	{
-		arr=V;
 		n=N;
+		for(int i=0;i<n;i++)
+		{
+			int x;cin>>x;
+			arr.push_back(x);
+		}
 	}
+};
+
+class Child: public Parent{
+public:
 	int max_1way();
 	int max_2way(int s,int e);
 	int max_3way(int s,int e);
 	int max_kway(int s,int e,int k);
 };
 
-int max_way::max_1way()
+int Child::max_1way()
 {
 	int m=arr[0];
 	for(int i=1;i<n;i++)
@@ -29,7 +39,7 @@ int max_way::max_1way()
 	return m;
 }
 
-int max_way::max_2way(int s,int e)
+int Child::max_2way(int s,int e)
 {
 	if(s==e)
 		return arr[s];
@@ -41,7 +51,7 @@ int max_way::max_2way(int s,int e)
 	return max(a,b);
 }
 
-int max_way::max_3way(int s, int e)
+int Child::max_3way(int s, int e)
 {
 
     if (s == e)
@@ -68,7 +78,7 @@ int max_way::max_3way(int s, int e)
     return max(m1,max(m2,m3));
 }
 
-int max_way::max_kway(int s, int e, int k)
+int Child::max_kway(int s, int e, int k)
 {
 
     if (s == e)
@@ -117,15 +127,12 @@ int max_way::max_kway(int s, int e, int k)
 
 int main()
 {
+	
+	Child ob;
 	int n;
+	cout<<"Enter the size"<<endl;
 	cin>>n;
-	vector<int>v(n);
-	for(int i=0;i<n;i++)
-	{
-		cin>>v[i];
-	}
-
-	max_way ob(v,n);
+	ob.input(n);
 	cout<<"1-Way "<<ob.max_1way()<<endl;
 	cout<<"2-Way "<<ob.max_2way(0,n-1)<<endl;
 	cout<<"3-way "<<ob.max_3way(0,n-1)<<endl;

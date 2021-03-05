@@ -1,22 +1,29 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class findneg_way{
+class Parent{
 public:
-	vector<int>arr;
 	int n;
-	findneg_way(vector<int>V,int N)
+	vector<int>arr;
+	void input(int N)
 	{
-		arr=V;
 		n=N;
+		for(int i=0;i<n;i++)
+		{
+			int x;cin>>x;
+			arr.push_back(x);
+		}
 	}
-	
+};
+
+class Child: public Parent{
+public:
 	int find_2way(int s,int e);
 	int find_3way(int s,int e);
 	
 };
 
-int findneg_way::find_2way(int s,int e)
+int Child::find_2way(int s,int e)
 {
 	if(s==e)
 	{
@@ -29,7 +36,7 @@ int findneg_way::find_2way(int s,int e)
 	return find_2way(s,mid)+find_2way(mid+1,e);
 }
 
-int findneg_way::find_3way(int low, int high)
+int Child::find_3way(int low, int high)
 {
 
     if (low == high){
@@ -60,16 +67,11 @@ int findneg_way::find_3way(int low, int high)
 int main()
 {
 	int n;
+	cout<<"Enter the size"<<endl;
 	cin>>n;
-	vector<int>v(n);
 
-	for(int i=0;i<n;i++)
-	{
-		cin>>v[i];
-	}
-
-	findneg_way ob(v,n);
-
+	Child ob;
+	ob.input(n);
 	cout<<"2-way ->"<<ob.find_2way(0,n-1)<<endl;
 	cout<<"3-way ->"<<ob.find_3way(0,n-1)<<endl;
 

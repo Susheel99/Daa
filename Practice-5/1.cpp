@@ -49,6 +49,30 @@ void insertionSort(vector<int>v)
 	print(v);
 }
 
+void selectionSort(vector<int>v)
+{
+	int p,i,j,min1,ind,n=v.size();
+	for( i=0;i<n;i++)
+	{
+		min1=v[i];p=0;
+		for( j=i+1;j<n;j++)
+		{
+			if(min1>v[j])
+			{
+				p++;
+				ind=j;
+				min1=v[j];
+			}
+		}
+		if(p!=0){
+		v[ind]=v[i];
+		v[i]=min1;
+	}
+	}
+	cout<<"selection Sort-> ";
+	print(v);
+}
+
 int main()
 {
 	int n;
@@ -62,4 +86,5 @@ int main()
 	}
 	bubbleSort(v);
 	insertionSort(v);
+	selectionSort(v);
 }

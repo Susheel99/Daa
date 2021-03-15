@@ -1,6 +1,15 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+void print(vector<int>v)
+{
+	for(auto c:v)
+	{
+		cout<<c<<" ";
+	}
+	cout<<endl;
+}
+
 void bubbleSort(vector<int>v)
 {
 	int temp,n=v.size();
@@ -18,12 +27,26 @@ void bubbleSort(vector<int>v)
 	}
 	cout<<endl;
 	cout<<"Bubble Sort-> ";
-	for(int i=0;i<n;i++)
-	{
-		cout<<v[i]<<" ";
-	}
-	cout<<endl;
+	print(v);
 
+}
+
+void insertionSort(vector<int>v)
+{
+	int n=v.size(),j=0,temp;
+	for(int i=1;i<n;i++)
+	{
+		j=i;
+		while(j!=0 && v[j]<v[j-1])
+		{
+			temp=v[j];
+			v[j]=v[j-1];
+			v[j-1]=temp;
+			j--;
+		}
+	}
+	cout<<"Insertion Sort-> ";
+	print(v);
 }
 
 int main()
@@ -38,4 +61,5 @@ int main()
 		cin>>v[i];
 	}
 	bubbleSort(v);
+	insertionSort(v);
 }

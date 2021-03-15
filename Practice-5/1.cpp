@@ -73,18 +73,68 @@ void selectionSort(vector<int>v)
 	print(v);
 }
 
+void merge(int a[],int s,int mid,int e)
+{
+	int i=s,j=mid+1,k=s;
+	int b[e+1];
+
+	while(i<=mid && j<=e)
+	{
+		if(a[i]<a[j])
+		{
+			b[k++]=a[i++];
+		}
+		else
+		{
+			b[k++]=a[j++];
+		}
+	}
+	while(i<=mid)
+	{
+		b[k++]=a[i++];
+	}
+	while(j<=e)
+	{
+		b[k++]=a[j++];
+	}
+	for(int i=s;i<=e;i++)
+	{
+		a[i]=b[i];
+	}
+}
+
+void mergesort(int a[],int s,int e)
+{
+	if(s<e)
+	{
+		int mid=s+(e-s)/2;
+
+		mergesort(a,s,mid);
+		mergesort(a,mid+1,e);
+
+		merge(a,s,mid,e);
+	}
+}
+
 int main()
 {
 	int n;
 	cout<<"Enter the no.of elements"<<endl;
 	cin>>n;
 	vector<int>v(n);
+	int a[n];
 	cout<<"Enter the elements"<<endl;
 	for(int i=0;i<n;i++)
 	{
-		cin>>v[i];
+		cin>>a[i];
 	}
-	bubbleSort(v);
-	insertionSort(v);
-	selectionSort(v);
+	//bubbleSort(v);
+	//insertionSort(v);
+	//selectionSort(v);
+	mergesort(a,0,n-1);
+	for(int i=0;i<n;i++)
+	{
+		cout<<a[i]<<" ";
+	}
+	cout<<endl;
 }

@@ -1,21 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void print(vector<int>v)
+void print(int v[],int n)
 {
-	for(auto c:v)
+	for(int i=0;i<n;i++)
 	{
-		cout<<c<<" ";
+		cout<<v[i]<<" ";
 	}
 	cout<<endl;
 }
 
-void bubbleSort(vector<int>v)
+void bubbleSort(int v[],int s,int e)
 {
-	int temp,n=v.size();
-	for(int i=0;i<n;i++)
+	int temp;
+	for(int i=s;i<=e;i++)
 	{
-		for(int j=0;j<n-i-1;j++)
+		for(int j=s;j<=e-i-1;j++)
 		{
 			if(v[j]>v[j+1])
 			{
@@ -27,7 +27,7 @@ void bubbleSort(vector<int>v)
 	}
 	cout<<endl;
 	cout<<"Bubble Sort-> ";
-	print(v);
+	//print(v);
 
 }
 
@@ -46,7 +46,7 @@ void insertionSort(vector<int>v)
 		}
 	}
 	cout<<"Insertion Sort-> ";
-	print(v);
+	//print(v);
 }
 
 void selectionSort(vector<int>v)
@@ -70,7 +70,7 @@ void selectionSort(vector<int>v)
 	}
 	}
 	cout<<"selection Sort-> ";
-	print(v);
+	//print(v);
 }
 
 void merge(int a[],int s,int mid,int e)
@@ -105,7 +105,11 @@ void merge(int a[],int s,int mid,int e)
 
 void mergesort(int a[],int s,int e)
 {
-	if(s<e)
+	if(e-s<10)
+	{
+		bubbleSort(a,s,e);
+	}
+	else if(s<e)
 	{
 		int mid=s+(e-s)/2;
 
@@ -128,13 +132,14 @@ int main()
 	{
 		cin>>a[i];
 	}
-	//bubbleSort(v);
+	//bubbleSort(a,0,4);
 	//insertionSort(v);
 	//selectionSort(v);
 	mergesort(a,0,n-1);
-	for(int i=0;i<n;i++)
-	{
-		cout<<a[i]<<" ";
-	}
-	cout<<endl;
+	// for(int i=0;i<n;i++)
+	// {
+	// 	cout<<a[i]<<" ";
+	// }
+	// cout<<endl;
+	print(a,n);
 }

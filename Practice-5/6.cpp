@@ -1,7 +1,30 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void insert(vector<int>v,int n)
+class Parent{
+public:
+	int n;
+	vector<int>arr;
+	void input(int N)
+	{
+		n=N;
+		cout<<"Enter the elements"<<endl;
+		for(int i=0;i<n;i++)
+		{
+			int x;cin>>x;
+			arr.push_back(x);
+		}
+	}
+};
+
+class Child:public Parent{
+public:
+	void insert(vector<int> v,int n);
+	int findMinimumElement(vector<int>heap,int n);
+
+};
+
+void Child::insert(vector<int>v,int n)
 {
 	int i,temp;
 	i=n;temp=v[i];
@@ -19,7 +42,7 @@ void insert(vector<int>v,int n)
 	cout<<endl;
 }
 
-int findMinimumElement(vector<int>heap, int n)
+int Child::findMinimumElement(vector<int>heap, int n)
 {
 	set<int>s;
     int minimumElement = heap[n / 2];
@@ -38,27 +61,24 @@ int findMinimumElement(vector<int>heap, int n)
 
 int main()
 {
-	cout<<"Enter the number of elements"<<endl;
+	Child ob;
 	int n;
+	cout<<"Enter the size"<<endl;
 	cin>>n;
+	ob.input(n);
 
-	vector<int>a(n);
-	cout<<"Enter the elements"<<endl;
-	for(int i=1;i<=n;i++)
-	{
-		cin>>a[i];
-	}
+	
 
 	vector<int>v;
 	v.push_back(-1);
 	for(int i=1;i<=n;i++)
 	{
-		v.push_back(a[i]);
-	    insert(v,v.size()-1);
+		v.push_back(ob.arr[i]);
+	    ob.insert(v,v.size()-1);
 	}
 
 	//cout<<"The minimum element in the heap is-> ";
-	findMinimumElement(v,v.size());
+	ob.findMinimumElement(v,v.size());
 	
 
 }

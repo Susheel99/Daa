@@ -19,6 +19,23 @@ void insert(vector<int>v,int n)
 	cout<<endl;
 }
 
+int findMinimumElement(vector<int>heap, int n)
+{
+	set<int>s;
+    int minimumElement = heap[n / 2];
+    s.insert(minimumElement);
+ 
+    for (int i = 1 + n / 2; i < n; ++i){
+    	s.insert(heap[i]);
+        //minimumElement = min(minimumElement, heap[i]);
+    }
+
+    auto it=s.begin();
+    cout<<"min elements"<<endl;
+    cout<<*it<<" "<<*(++it)<<endl;
+    return minimumElement;
+}
+
 int main()
 {
 	cout<<"Enter the number of elements"<<endl;
@@ -39,6 +56,9 @@ int main()
 		v.push_back(a[i]);
 	    insert(v,v.size()-1);
 	}
+
+	//cout<<"The minimum element in the heap is-> ";
+	findMinimumElement(v,v.size());
 	
 
 }

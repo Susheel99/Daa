@@ -10,12 +10,12 @@ void print(int v[],int n)
 	cout<<endl;
 }
 
-void bubbleSort(int v[],int s,int e)
+void bubbleSort(int *v,int s,int e)
 {
 	int temp;
 	for(int i=s;i<=e;i++)
 	{
-		for(int j=s;j<=e-i-1;j++)
+		for(int j=s;j<=e;j++)
 		{
 			if(v[j]>v[j+1])
 			{
@@ -28,6 +28,11 @@ void bubbleSort(int v[],int s,int e)
 	cout<<endl;
 	cout<<"Bubble Sort-> ";
 	//print(v);
+	for(int i=s;i<=e;i++)
+	{
+		cout<<v[i]<<" ";
+	}
+	cout<<endl;
 
 }
 
@@ -69,7 +74,7 @@ void selectionSort(vector<int>v)
 		v[i]=min1;
 	}
 	}
-	cout<<"selection Sort-> ";
+	cout<<"selection Sort-> "<<endl;
 	//print(v);
 }
 
@@ -105,19 +110,24 @@ void merge(int a[],int s,int mid,int e)
 
 void mergesort(int a[],int s,int e)
 {
-	if(e-s<10)
+	int mid=s+(e-s)/2;
+	if(e-s<5 and s<e)
 	{
+		cout<<"YES"<<endl;
 		bubbleSort(a,s,e);
+		return ;
 	}
 	else if(s<e)
 	{
-		int mid=s+(e-s)/2;
+		cout<<"No"<<endl;
+		// int mid=s+(e-s)/2;
 
 		mergesort(a,s,mid);
 		mergesort(a,mid+1,e);
-
-		merge(a,s,mid,e);
 	}
+
+	merge(a,s,mid,e);
+	
 }
 
 int main()

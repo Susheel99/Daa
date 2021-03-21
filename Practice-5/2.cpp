@@ -1,17 +1,97 @@
-// C++ Program to perform 3 way Merge Sort 
 #include <bits/stdc++.h> 
 using namespace std; 
 
-/* Merge the sorted ranges [low, mid1), [mid1,mid2) 
-and [mid2, high) mid1 is first midpoint 
-index in overall range to merge mid2 is second 
-midpoint index in overall range to merge*/
-void merge(int gArray[], int low, int mid1, 
-		int mid2, int high, int destArray[]) 
+
+class Parent{
+public:
+	void bubbleSort(int *v,int s,int e);
+	void selectionSort(int *v,int s,int e);
+	void insertionSort(int *v,int s,int e);
+	void print(int v[],int n);
+	//vector<int> randomVector(ll n,ll lower,ll upper);
+
+
+};
+
+class Child:public Parent{
+public:
+	void merge(int gArray[], int low, int mid1, 
+		int mid2, int high);
+	void mergeSort3WayRec_bubble(int gArray[], int low, 
+					int high);
+	void mergeSort3WayRec_selection(int gArray[], int low, 
+					int high);
+	void mergeSort3WayRec_insertion(int gArray[], int low, 
+					int high);
+	//void mergeSort3Way(int gArray[], int n);
+
+};
+
+
+
+
+void Parent::bubbleSort(int *v,int s,int e)
+{
+	int temp;
+	for(int i=s;i<=e;i++)
+	{
+		for(int j=s;j<=e;j++)
+		{
+			if(v[j]>v[j+1])
+			{
+				temp=v[j];
+				v[j]=v[j+1];
+				v[j+1]=temp;			
+			}
+		}
+	}
+}
+
+void Parent::insertionSort(int *v,int s,int e)
+{
+	int j=0,temp;
+	for(int i=s+1;i<=e;i++)
+	{
+		j=i;
+		while(j!=s && v[j]<v[j-1])
+		{
+			temp=v[j];
+			v[j]=v[j-1];
+			v[j-1]=temp;
+			j--;
+		}
+	}
+}
+
+void Parent::selectionSort(int *v,int s,int e)
+{
+	int p,i,j,min1,ind;
+	for( i=s;i<=e;i++)
+	{
+		min1=v[i];p=0;
+		for( j=i+1;j<=e;j++)
+		{
+			if(min1>v[j])
+			{
+				p++;
+				ind=j;
+				min1=v[j];
+			}
+		}
+		if(p!=0){
+		v[ind]=v[i];
+		v[i]=min1;
+	}
+	}
+
+}
+
+void Child::merge(int gArray[], int low, int mid1, 
+		int mid2, int high) 
 { 
+	int destArray[high+1];
 	int i = low, j = mid1, k = mid2, l = low; 
 
-	// choose smaller of the smallest in the three ranges 
 	while ((i < mid1) && (j < mid2) && (k < high)) 
 	{ 
 		if(gArray[i] < gArray[j]) 
@@ -38,8 +118,6 @@ void merge(int gArray[], int low, int mid1,
 		} 
 	} 
 
-	// case where first and second ranges 
-	// have remaining values 
 	while ((i < mid1) && (j < mid2)) 
 	{ 
 		if(gArray[i] < gArray[j]) 
@@ -52,8 +130,7 @@ void merge(int gArray[], int low, int mid1,
 		} 
 	} 
 
-	// case where second and third ranges 
-	// have remaining values 
+
 	while ((j < mid2) && (k < high)) 
 	{ 
 		if(gArray[j] < gArray[k]) 
@@ -66,8 +143,6 @@ void merge(int gArray[], int low, int mid1,
 		} 
 	} 
 
-	// case where first and third ranges have 
-	// remaining values 
 	while ((i < mid1) && (k < high)) 
 	{ 
 		if(gArray[i] < gArray[k]) 
@@ -80,103 +155,102 @@ void merge(int gArray[], int low, int mid1,
 		} 
 	} 
 
-	// copy remaining values from the first range 
 	while (i < mid1) 
 		destArray[l++] = gArray[i++]; 
 
-	// copy remaining values from the second range 
 	while (j < mid2) 
 		destArray[l++] = gArray[j++]; 
 
-	// copy remaining values from the third range 
 	while (k < high) 
 		destArray[l++] = gArray[k++]; 
+
+	for(int i=low;i<=high;i++)
+	{
+		gArray[i]=destArray[i];
+	}
+
 } 
 
-void bubbleSort(int v[],int s,int e)
-{
-	int temp;
-	for(int i=s;i<=e;i++)
-	{
-		for(int j=s;j<=e;j++)
-		{
-			if(v[j]>v[j+1])
-			{
-				temp=v[j];
-				v[j]=v[j+1];
-				v[j+1]=temp;
-			}
-		}
-	}
-	cout<<endl;
-	cout<<"Bubble Sort-> ";
-	//print(v);
-
-}
 
 
-/* Performing the merge sort algorithm on the 
-given array of values in the rangeof indices 
-[low, high). low is minimum index, high is 
-maximum index (exclusive) */
-void mergeSort3WayRec(int gArray[], int low, 
-					int high, int destArray[]) 
+void Child::mergeSort3WayRec_bubble(int gArray[], int low, 
+					int high) 
 { 
-	// If array size is 1 then do nothing 
 	if(high-low<4 and high - low < 2)
 	{
-		cout<<"Yes"<<endl;
 		bubbleSort(gArray,low,high);
 		return ;
 	}
 	else if (high - low < 2) 
 		return; 
 
-	// Splitting array into 3 parts 
 	else{
-		cout<<"NO"<<endl;
 	int mid1 = low + ((high - low) / 3); 
 	int mid2 = low + 2 * ((high - low) / 3) + 1; 
 
-	// Sorting 3 arrays recursively 
-	mergeSort3WayRec(destArray, low, mid1, gArray); 
-	mergeSort3WayRec(destArray, mid1, mid2, gArray); 
-	mergeSort3WayRec(destArray, mid2, high, gArray); 
 
-	// Merging the sorted arrays 
-	merge(destArray, low, mid1, mid2, high, gArray); 
-}
+	mergeSort3WayRec_bubble(gArray, low, mid1); 
+	mergeSort3WayRec_bubble(gArray, mid1, mid2); 
+	mergeSort3WayRec_bubble(gArray, mid2, high); 
+
+	merge(gArray, low, mid1, mid2, high); 
+    }
 } 
 
-void mergeSort3Way(int gArray[], int n) 
+void Child::mergeSort3WayRec_selection(int gArray[], int low, 
+					int high) 
 { 
-	// if array size is zero return null 
-	if (n == 0) 
+	if(high-low<4 and high - low < 2)
+	{
+		selectionSort(gArray,low,high);
+		return ;
+	}
+	else if (high - low < 2) 
 		return; 
 
-	// creating duplicate of given array 
-	int fArray[n]; 
+	else{
+	int mid1 = low + ((high - low) / 3); 
+	int mid2 = low + 2 * ((high - low) / 3) + 1; 
 
-	// copying alements of given array into 
-	// duplicate array 
-	for (int i = 0; i < n; i++) 
-		fArray[i] = gArray[i]; 
 
-	// sort function 
-	mergeSort3WayRec(fArray, 0, n, gArray); 
+	mergeSort3WayRec_selection(gArray, mid2, high); 
+	mergeSort3WayRec_selection(gArray, mid2, high); 
+	mergeSort3WayRec_selection(gArray, mid2, high); 
 
-	// copy back elements of duplicate array 
-	// to given array 
-	for (int i = 0; i < n; i++) 
-		gArray[i] = fArray[i]; 
+	merge(gArray, low, mid1, mid2, high); 
+    }
 } 
 
-// Driver Code 
+void Child::mergeSort3WayRec_insertion(int gArray[], int low, 
+					int high) 
+{ 
+	if(high-low<4 and high - low < 2)
+	{
+		insertionSort(gArray,low,high);
+		return ;
+	}
+	else if (high - low < 2) 
+		return; 
+
+	else{
+	int mid1 = low + ((high - low) / 3); 
+	int mid2 = low + 2 * ((high - low) / 3) + 1; 
+
+
+	mergeSort3WayRec_insertion(gArray, mid2, high); 
+	mergeSort3WayRec_insertion(gArray, mid2, high); 
+	mergeSort3WayRec_insertion(gArray, mid2, high); 
+
+	merge(gArray, low, mid1, mid2, high); 
+    }
+} 
+
 int main() 
 { 
 	int data[] = {45, -2, -45, 78, 30, 
 				-42, 10, 19, 73, 93,87,95,62,47,45,79,25,36,64,15}; 
-	mergeSort3Way(data,20); 
+	Child ob;
+	ob.mergeSort3WayRec_bubble(data,0,20); 
 	cout << "After 3 way merge sort: "; 
 	for (int i = 0; i < 20; i++) 
 	{ 
@@ -184,5 +258,3 @@ int main()
 	} 
 	return 0; 
 } 
-
-// This code is contributed by Rashmi Kumari 

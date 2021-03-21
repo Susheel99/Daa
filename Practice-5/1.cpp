@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+using namespace std::chrono;
 
 #define ll long long
 
@@ -53,7 +54,7 @@ void Parent::bubbleSort(int *v,int s,int e)
 			{
 				temp=v[j];
 				v[j]=v[j+1];
-				v[j+1]=temp;
+				v[j+1]=temp;			
 			}
 		}
 	}
@@ -186,7 +187,7 @@ void Child::mergesort_insertion(int a[],int s,int e)
 
 int main()
 {
-	int n;
+	int n,m1,m2,m3;
 	cout<<"Enter the no.of elements"<<endl;
 	cin>>n;
 
@@ -202,23 +203,40 @@ int main()
 	}
 
 
-	
 
 	cout<<"----------------merge+bubble----------------"<<endl;
+	auto start = high_resolution_clock::now(); 
 	ob.mergesort_bubble(a,0,n-1);
+	auto stop = high_resolution_clock::now(); 
+	auto duration = duration_cast<microseconds>(stop - start); 
+	m1=duration.count();
+
 	ob.print(a,n);
+	cout<<"Time Duration-> "<<m1<<endl;
 	cout<<endl;
+	
 
 
 
 	cout<<"----------------merge+selection----------------"<<endl;
+	start = high_resolution_clock::now(); 
 	ob.mergesort_selection(a,0,n-1);
+	stop = high_resolution_clock::now(); 
+	duration = duration_cast<microseconds>(stop - start); 
+	m2=duration.count();
+
 	ob.print(a,n);
+	cout<<"Time Duration-> "<<m2<<endl;
 	cout<<endl;
 
-
 	cout<<"----------------merge+insertion----------------"<<endl;
+	start = high_resolution_clock::now();
 	ob.mergesort_insertion(a,0,n-1);
+	stop = high_resolution_clock::now(); 
+	duration = duration_cast<microseconds>(stop - start); 
+	m3=duration.count();
+
 	ob.print(a,n);
+	cout<<"Time Duration-> "<<m3<<endl;
 	cout<<endl;
 }

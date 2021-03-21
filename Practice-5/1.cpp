@@ -1,12 +1,15 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define ll long long
+
 class Parent{
 public:
 	void bubbleSort(int *v,int s,int e);
 	void selectionSort(int *v,int s,int e);
 	void insertionSort(int *v,int s,int e);
 	void print(int v[],int n);
+	vector<int> randomVector(ll n,ll lower,ll upper);
 
 
 };
@@ -19,6 +22,16 @@ public:
 	void mergesort_insertion(int a[],int s,int e);
 
 };
+
+vector<int> Parent::randomVector(ll n,ll lower,ll upper)
+{
+       vector<int>v;
+       for(ll i=0;i<=n;i++){
+       ll num = (rand() % (upper - lower + 1)) + lower;
+        v.push_back(num);
+        }
+        return v;
+}
 
 void Parent::print(int v[],int n)
 {
@@ -44,7 +57,6 @@ void Parent::bubbleSort(int *v,int s,int e)
 			}
 		}
 	}
-	cout<<endl;
 }
 
 void Parent::insertionSort(int *v,int s,int e)
@@ -119,7 +131,7 @@ void Child::merge(int a[],int s,int mid,int e)
 void Child::mergesort_bubble(int a[],int s,int e)
 {
 	int mid=s+(e-s)/2;
-	if(e-s<5 and s<e)
+	if(e-s<=20 and s<e)
 	{
 		bubbleSort(a,s,e);
 		return ;
@@ -137,7 +149,7 @@ void Child::mergesort_bubble(int a[],int s,int e)
 void Child::mergesort_selection(int a[],int s,int e)
 {
 	int mid=s+(e-s)/2;
-	if(e-s<5 and s<e)
+	if(e-s<=20 and s<e)
 	{
 		selectionSort(a,s,e);
 		return ;
@@ -155,7 +167,7 @@ void Child::mergesort_selection(int a[],int s,int e)
 void Child::mergesort_insertion(int a[],int s,int e)
 {
 	int mid=s+(e-s)/2;
-	if(e-s<5 and s<e)
+	if(e-s<=20 and s<e)
 	{
 		insertionSort(a,s,e);
 		return ;
@@ -178,27 +190,35 @@ int main()
 	cout<<"Enter the no.of elements"<<endl;
 	cin>>n;
 
+	Child ob;
+
+	vector<int>v=ob.randomVector(1000,5,500);
+
 	int a[n];
 	cout<<"Enter the elements"<<endl;
 	for(int i=0;i<n;i++)
 	{
-		cin>>a[i];
+		a[i]=v[i];
 	}
 
 
-	Child ob;
+	
 
-	cout<<"--------merge+bubble--------"<<endl;
+	cout<<"----------------merge+bubble----------------"<<endl;
 	ob.mergesort_bubble(a,0,n-1);
 	ob.print(a,n);
+	cout<<endl;
 
 
-	cout<<"--------merge+selection--------"<<endl;
+
+	cout<<"----------------merge+selection----------------"<<endl;
 	ob.mergesort_selection(a,0,n-1);
 	ob.print(a,n);
+	cout<<endl;
 
 
-	cout<<"--------merge+insertion--------"<<endl;
+	cout<<"----------------merge+insertion----------------"<<endl;
 	ob.mergesort_insertion(a,0,n-1);
 	ob.print(a,n);
+	cout<<endl;
 }

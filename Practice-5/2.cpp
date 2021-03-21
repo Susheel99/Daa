@@ -1,5 +1,8 @@
 #include <bits/stdc++.h> 
 using namespace std; 
+using namespace std::chrono;
+
+#define ll long long
 
 
 class Parent{
@@ -8,7 +11,7 @@ public:
 	void selectionSort(int *v,int s,int e);
 	void insertionSort(int *v,int s,int e);
 	void print(int v[],int n);
-	//vector<int> randomVector(ll n,ll lower,ll upper);
+	vector<int> randomVector(ll n,ll lower,ll upper);
 
 
 };
@@ -23,12 +26,27 @@ public:
 					int high);
 	void mergeSort3WayRec_insertion(int gArray[], int low, 
 					int high);
-	//void mergeSort3Way(int gArray[], int n);
 
 };
 
+vector<int> Parent::randomVector(ll n,ll lower,ll upper)
+{
+       vector<int>v;
+       for(ll i=0;i<=n;i++){
+       ll num = (rand() % (upper - lower + 1)) + lower;
+        v.push_back(num);
+        }
+        return v;
+}
 
-
+void Parent::print(int v[],int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		cout<<v[i]<<" ";
+	}
+	cout<<endl;
+}
 
 void Parent::bubbleSort(int *v,int s,int e)
 {
@@ -247,14 +265,57 @@ void Child::mergeSort3WayRec_insertion(int gArray[], int low,
 
 int main() 
 { 
-	int data[] = {45, -2, -45, 78, 30, 
-				-42, 10, 19, 73, 93,87,95,62,47,45,79,25,36,64,15}; 
+	int n,m1,m2,m3;
+	cout<<"Enter the no.of elements"<<endl;
+	cin>>n;
+
 	Child ob;
-	ob.mergeSort3WayRec_bubble(data,0,20); 
-	cout << "After 3 way merge sort: "; 
-	for (int i = 0; i < 20; i++) 
-	{ 
-		cout << data[i] << " "; 
-	} 
-	return 0; 
+
+	vector<int>v=ob.randomVector(1000,0,500);
+
+	int a[n];
+	cout<<"Enter the elements"<<endl;
+	for(int i=0;i<n;i++)
+	{
+		a[i]=v[i];
+	}
+
+	//ob.mergeSort3WayRec_bubble(a,0,n); 
+
+	cout<<"----------------merge+bubble----------------"<<endl;
+	auto start = high_resolution_clock::now(); 
+	ob.mergeSort3WayRec_bubble(a,0,n); 
+	auto stop = high_resolution_clock::now(); 
+	auto duration = duration_cast<microseconds>(stop - start); 
+	m1=duration.count();
+
+	ob.print(a,n);
+	cout<<"Time Duration-> "<<m1<<endl;
+	cout<<endl;
+	
+
+
+
+	cout<<"----------------merge+selection----------------"<<endl;
+	start = high_resolution_clock::now(); 
+	ob.mergeSort3WayRec_selection(a,0,n);
+	stop = high_resolution_clock::now(); 
+	duration = duration_cast<microseconds>(stop - start); 
+	m2=duration.count();
+
+	ob.print(a,n);
+	cout<<"Time Duration-> "<<m2<<endl;
+	cout<<endl;
+
+	cout<<"----------------merge+insertion----------------"<<endl;
+	start = high_resolution_clock::now();
+	ob.mergeSort3WayRec_insertion(a,0,n);
+	stop = high_resolution_clock::now(); 
+	duration = duration_cast<microseconds>(stop - start); 
+	m3=duration.count();
+
+	ob.print(a,n);
+	cout<<"Time Duration-> "<<m3<<endl;
+	cout<<endl;
+	
 } 

@@ -3,43 +3,41 @@ using namespace std;
 
 class Parent{
 public:
-	int n;
-	vector<int>arr;
-	void input(int N)
-	{
-		n=N;
-		cout<<"Enter the elements"<<endl;
-		for(int i=0;i<n;i++)
-		{
-			int x;cin>>x;
-			arr.push_back(x);
-		}
-	}
+	int n=9;
+	vector<int> arr = {45, 35, 15, 30, 10, 12, 6, 5, 20};
+	
+	//arr.push_back(-1);
+	// void input(int N)
+	// {
+	// 	n=N;
+	// 	cout<<"Enter the elements"<<endl;
+	// 	for(int i=0;i<n;i++)
+	// 	{
+	// 		int x;cin>>x;
+	// 		arr.push_back(x);
+	// 	}
+	// }
 };
 
 class Child:public Parent{
 public:
-	void insert(vector<int> v,int n);
-	int findMinimumElement(vector<int>heap,int n);
+	void insert(vector<int> &v,int n);
+	int findMinimumElement(vector<int>heap,int key);
 
 };
 
-void Child::insert(vector<int>v,int n)
+void Child::insert(vector<int>&vec,int key)
 {
-	int i,temp;
-	i=n;temp=v[i];
-	while(i>1 && temp>v[i/2])
-	{
-		v[i]=v[i/2];
-		i=i/2;
-	}
-	v[i]=temp;
-
-	for(int i=1;i<v.size();i++)
-	{
-		cout<<v[i]<<" ";
-	}
-	cout<<endl;
+	// Insert key at the end
+    auto i = vec.size();
+    vec.emplace_back(key);
+ 
+    // Rearrange elements: Indices are not DRY :-(
+    while (i > 0 && key > vec[i % 2 == 0 ? (i/2)-1 : i/2]){
+        vec[i] = vec[i % 2 == 0 ? (i/2)-1 : i/2];
+        i = i % 2 == 0 ? (i/2)-1 : i/2;
+    }
+    vec[i] = key;
 }
 
 int Child::findMinimumElement(vector<int>heap, int n)
@@ -63,22 +61,13 @@ int main()
 {
 	Child ob;
 	int n;
-	cout<<"Enter the size"<<endl;
-	cin>>n;
-	ob.input(n);
-
-	
-
-	vector<int>v;
-	v.push_back(-1);
-	for(int i=1;i<=n;i++)
-	{
-		v.push_back(ob.arr[i]);
-	    ob.insert(v,v.size()-1);
-	}
+	cout<<"Enter the element"<<endl;
+	//cin>>n;
+	//ob.input(n);
 
 	//cout<<"The minimum element in the heap is-> ";
-	ob.findMinimumElement(v,v.size());
+	ob.insert(ob.arr,2);
+	ob.findMinimumElement(ob.arr,ob.arr.size());
 	
 
 }

@@ -1,4 +1,3 @@
-// C++ program to implement dual pivot QuickSort
 #include<bits/stdc++.h>
 using namespace std;
 

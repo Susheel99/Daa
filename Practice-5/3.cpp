@@ -1,90 +1,98 @@
-
- 
 // C++ program to implement dual pivot QuickSort
 #include<bits/stdc++.h>
-  using namespace std;
+using namespace std;
 
- 
- 
-int partition (int *arr, int low, int high, int *lp);
 
- 
-void swap (int *a, int *b) 
+
+class Parent{
+public:
+	int arr[101];
+	void swap (int *a, int *b);
+	void print(int a[],int n);
+	void input(int n)
+	{
+		cout<<"Enter the elements"<<endl;
+		for(int i=0;i<n;i++)
+		{
+			cin>>arr[i];
+		}
+	}
+};
+
+class Child:public Parent{
+public:
+	void DualPivotQuickSort (int *arr, int low, int high);
+	int partition (int *arr, int low, int high, int *lp);
+
+};
+
+void Parent::print(int a[],int n)
 {
-  
-int temp = *a;
-  
-*a = *b;
-  
-*b = temp;
+	cout<<"Dual Pivot Quick sort"<<endl;
+	for(int i=0;i<n;i++)
+	{
+		cout<<a[i]<<" ";
+	}
+	cout<<endl;
+}
 
+ 
+void Parent::swap (int *a, int *b) 
+{ 
+  int temp = *a; 
+  *a = *b;  
+  *b = temp;
 } 
  
-void
-
-DualPivotQuickSort (int *arr, int low, int high) 
+void Child::DualPivotQuickSort (int *arr, int low, int high) 
 {
   
-if (low < high)
-    {				// lp means left pivot, and rp means right pivot.
-      int lp, rp;
+  if (low < high)
+  {				// lp means left pivot, and rp means right pivot.
+    int lp, rp;  
+    rp = partition (arr, low, high, &lp);
       
-rp = partition (arr, low, high, &lp);
-      
-DualPivotQuickSort (arr, low, lp - 1);
-      
-DualPivotQuickSort (arr, lp + 1, rp - 1);
-      
-DualPivotQuickSort (arr, rp + 1, high);
-    
+    DualPivotQuickSort (arr, low, lp - 1);  
+    DualPivotQuickSort (arr, lp + 1, rp - 1);
+    DualPivotQuickSort (arr, rp + 1, high);
+  }
 }
 
- 
-} int
 
-partition (int *arr, int low, int high, int *lp) 
-{
+int Child::partition (int *arr, int low, int high, int *lp) 
+ {
   if (arr[low] > arr[high])
-    
-swap (&arr[low], &arr[high]);
-  
- 
+    swap (&arr[low], &arr[high]);
+
 // p is the left pivot, and q is the right pivot.
   int j = low + 1;
+  int g = high -1, k = low + 1, p = arr[low], q = arr[high];
   
-int g = high -1, k = low + 1, p = arr[low], q = arr[high];
-  
-while (k <= g)
+   while (k <= g)
     {				// if elements are less than the left pivot 
       if (arr[k] < p)
-	{
-	  swap (&arr[k], &arr[j]);
-	  j++;
-	}			// if elements are greater than or equal // to the right pivot 
-      else if (arr[k] >= q)
-	{
+	  {
+	   swap (&arr[k], &arr[j]);
+	   j++;
+	  }			// if elements are greater than or equal // to the right pivot 
+     else if (arr[k] >= q)
+	 {
+	   while (arr[g] > q && k < g) g--;
+	     swap (&arr[k], &arr[g]);
+	     g--;
 	  
-while (arr[g] > q && k < g)
-	    
-g--;
-	  
-swap (&arr[k], &arr[g]);
-	  
-g--;
-	  
-if (arr[k] < p)
-	{
-		swap (&arr[k], &arr[j]);  
-        j++;
-    } 
-}
+       if (arr[k] < p)
+	    {
+		  swap (&arr[k], &arr[j]);  
+          j++;
+        } 
+     }
       k++;
-     
-}
+     }
   
-j--;
+  j--;
   
-g++;				// bring pivots to their appropriate positions.
+  g++;				// bring pivots to their appropriate positions.
   swap (&arr[low], &arr[j]);
   swap (&arr[high], &arr[g]);	// returning the indices of the pivots.
   *lp = j;			// because we cannot return two elements // from a function.
@@ -94,15 +102,16 @@ g++;				// bring pivots to their appropriate positions.
 
 int main () 
 {
-  
-int arr[] = { 24, 8, 42, 75, 29, 77, 38, 57 };  
-DualPivotQuickSort (arr, 0, 7);
+	cout<<"Enter the number of elements"<<endl;
+	int n;
+	cin>>n;
+     
+    Child ob;
+    ob.input(n);
+    ob.DualPivotQuickSort (ob.arr, 0, n-1);
  
-cout << "Sorted array: ";
-  
-for (int i = 0; i < 8; i++)    
-cout << arr[i] << " ";
-cout << endl;
+    ob.print(ob.arr,n);
+
 }				
 
 

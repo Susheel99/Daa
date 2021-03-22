@@ -194,7 +194,7 @@ void Child::merge(int gArray[], int low, int mid1,
 void Child::mergeSort3WayRec_bubble(int gArray[], int low, 
 					int high) 
 { 
-	if(high-low<4 and high - low < 2)
+	if(high-low<20 and high - low < 2)
 	{
 		bubbleSort(gArray,low,high);
 		return ;
@@ -218,7 +218,7 @@ void Child::mergeSort3WayRec_bubble(int gArray[], int low,
 void Child::mergeSort3WayRec_selection(int gArray[], int low, 
 					int high) 
 { 
-	if(high-low<4 and high - low < 2)
+	if(high-low<20 and high - low < 2)
 	{
 		selectionSort(gArray,low,high);
 		return ;
@@ -231,8 +231,8 @@ void Child::mergeSort3WayRec_selection(int gArray[], int low,
 	int mid2 = low + 2 * ((high - low) / 3) + 1; 
 
 
-	mergeSort3WayRec_selection(gArray, mid2, high); 
-	mergeSort3WayRec_selection(gArray, mid2, high); 
+	mergeSort3WayRec_selection(gArray, low, mid1); 
+	mergeSort3WayRec_selection(gArray, mid1, mid2); 
 	mergeSort3WayRec_selection(gArray, mid2, high); 
 
 	merge(gArray, low, mid1, mid2, high); 
@@ -242,7 +242,7 @@ void Child::mergeSort3WayRec_selection(int gArray[], int low,
 void Child::mergeSort3WayRec_insertion(int gArray[], int low, 
 					int high) 
 { 
-	if(high-low<4 and high - low < 2)
+	if(high-low<20 and high - low < 2)
 	{
 		insertionSort(gArray,low,high);
 		return ;
@@ -255,8 +255,8 @@ void Child::mergeSort3WayRec_insertion(int gArray[], int low,
 	int mid2 = low + 2 * ((high - low) / 3) + 1; 
 
 
-	mergeSort3WayRec_insertion(gArray, mid2, high); 
-	mergeSort3WayRec_insertion(gArray, mid2, high); 
+	mergeSort3WayRec_insertion(gArray, low, mid1); 
+	mergeSort3WayRec_insertion(gArray, mid1, mid2); 
 	mergeSort3WayRec_insertion(gArray, mid2, high); 
 
 	merge(gArray, low, mid1, mid2, high); 
@@ -271,7 +271,7 @@ int main()
 
 	Child ob;
 
-	vector<int>v=ob.randomVector(1000,0,500);
+	vector<int>v=ob.randomVector(n,0,500);
 
 	int a[n];
 	cout<<"Enter the elements"<<endl;
@@ -279,7 +279,7 @@ int main()
 	{
 		a[i]=v[i];
 	}
-
+	
 	//ob.mergeSort3WayRec_bubble(a,0,n); 
 
 	cout<<"----------------merge+bubble----------------"<<endl;

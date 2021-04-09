@@ -4,13 +4,14 @@ using namespace std;
 int make_change(int *coins,int n,int money)
 {
 	int ans=0;
-	while(money>0){
+	while(money>0)
+	{
 		//address of the number just less than money
-	int idx=upper_bound(coins,coins+n,money)-1-coins;
-	cout<<coins[idx]<<" + ";
-	money=money-coins[idx];
-	ans++;
-}
+	    int idx=upper_bound(coins,coins+n,money)-1-coins;
+	    cout<<coins[idx]<<" + ";
+	    money=money-coins[idx];
+	    ans++;
+    }
 return ans;
 }
 

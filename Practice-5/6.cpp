@@ -23,21 +23,10 @@ void Parent::Print(vector<int>& vec, int n){
 class Child:public Parent{
 public:
 	void insert(vector<int> &v,int n);
-	int findMinimumElement(vector<int>heap,int key);
+	void findMin(vector<int>h,int key);
 
 };
 
-
-// void Child::Print(vector<int>& vec, int n){
-//     cout << "Max Heap: [" << flush;
-//     for (int i=0; i<n; i++){
-//         cout << vec[i] << flush;
-//         if (i < n-1){
-//             cout << ", " << flush;
-//         }
-//     }
-//     cout << "]" << endl;
-// }
 
 void Child::insert(vector<int>&vec,int key)
 {
@@ -53,30 +42,30 @@ void Child::insert(vector<int>&vec,int key)
     vec[i] = key;
 }
 
-int Child::findMinimumElement(vector<int>heap, int n)
+void Child::findMin(vector<int>h, int n)
 {
 	set<int>s;
-    int minimumElement = heap[n / 2];
+    int minimumElement = h[n / 2];
     s.insert(minimumElement);
  
     for (int i = 1 + n / 2; i < n; ++i){
-    	s.insert(heap[i]);
-        //minimumElement = min(minimumElement, heap[i]);
+    	s.insert(h[i]);
     }
+        
 
     auto it=s.begin();
     cout<<"min elements"<<endl;
     cout<<*it<<" "<<*(++it)<<endl;
-    return minimumElement;
+    
 }
 
 int main()
 {
 	Child ob;
 	int n;
-	ob.insert(ob.arr,2);
+	//ob.insert(ob.arr,2);
 	ob.Print(ob.arr,ob.arr.size());
-	ob.findMinimumElement(ob.arr,ob.arr.size());
+	ob.findMin(ob.arr,ob.arr.size());
 	
 
 }

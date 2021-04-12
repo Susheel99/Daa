@@ -18,24 +18,27 @@ int main()
         v.push_back(make_pair(s,e));
     }
     sort(v.begin(),v.end(),comp);
-    double ans=0;
-    i=0;
-    while(maxwt-v[i].second>=0&&i<n)
-    {
-        ans+=v[i].first;
-        maxwt-=v[i].second;
-        i++;
+    int knpwt = 0; 
+    double result = 0.0; 
+ 
+
+    for (int i = 0; i < n; i++) {
+
+        if (knpwt + v[i].second <= maxwt)
+         {
+            knpwt += v[i].second;
+            result += v[i].first;
+        }
+ 
+
+        else
+         {
+            int remain = maxwt - knpwt;
+            result += v[i].first* ((double)remain/ (double)v[i].second);
+            break;
+        }
     }
-    //cout<<ans<<endl;
-    if(maxwt==0||i==n)
-    {
-        cout<<ans;
-    }
-    else
-    {
-        ans+=(double)(((double)v[i].first/v[i].second)*(maxwt));
-        cout<<ans;
-    }
-    return 0;
+ 
+    cout<<result<<endl;
 }
 

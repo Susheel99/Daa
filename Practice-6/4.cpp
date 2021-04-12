@@ -34,4 +34,5 @@ int main()
 	{
 		cin>>a[i];
 	}
-	cout << solve(a) << endl;}
+	cout << solve(a) << endl;
+}

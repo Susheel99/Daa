@@ -1,4 +1,4 @@
-// CPP program to find minimum increment/decrement
+// Find minimum increment/decrement
 // operations to make array elements same.
 
 #include <bits/stdc++.h>
